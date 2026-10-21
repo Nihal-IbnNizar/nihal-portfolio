@@ -56,7 +56,7 @@ npx serve .
 ## 🚀 Step 1: Push to GitHub
 
 ### 1. Initialize Git in this directory
-Open your terminal in `d:\nihal-portfolio` and run:
+Open your terminal in `d:\folder-name` and run:
 
 ```bash
 git init

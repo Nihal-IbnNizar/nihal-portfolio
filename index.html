@@ -26,7 +26,9 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="bg-[#0A0A0A]">
+  <!-- Blueprint Dot Grid (Technical architectural background) -->
+  <div class="bg-grid" aria-hidden="true"></div>
 
   <!-- Sticky Site Header -->
   <header class="site-header">
@@ -76,6 +78,44 @@
 
       <div class="daily-drivers" id="daily-drivers-list">
         <span class="daily-drivers-label">Daily drivers</span>
+      </div>
+
+      <!-- Interactive Mini Test Runner Terminal -->
+      <div class="test-terminal" id="test-terminal">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+          </div>
+          <span class="terminal-title">qa-engine@nihal: ~/test-suites</span>
+          <button class="terminal-run-btn" id="run-tests-btn" type="button" aria-label="Run automated test suite">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+            <span>Run Suite</span>
+          </button>
+        </div>
+        <div class="terminal-body" id="terminal-output">
+          <div class="terminal-cmd">$ pytest -v --parallel-threads=4</div>
+          <div class="terminal-row">
+            <span class="terminal-badge">✔ PASS</span>
+            <span class="terminal-file">tests/analytics_engine.spec.ts</span>
+            <span class="terminal-time">0.42s</span>
+          </div>
+          <div class="terminal-row">
+            <span class="terminal-badge">✔ PASS</span>
+            <span class="terminal-file">tests/mobile_appium_suite.py</span>
+            <span class="terminal-time">0.31s</span>
+          </div>
+          <div class="terminal-row">
+            <span class="terminal-badge">✔ PASS</span>
+            <span class="terminal-file">tests/ai_agent_validation.spec.ts</span>
+            <span class="terminal-time">0.18s</span>
+          </div>
+          <div class="terminal-summary">
+            <span>✨ All 3 test suites passed</span>
+            <span>100% reliability (0.91s)</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -169,6 +209,14 @@
   <div id="toast" class="toast" role="status" aria-live="polite">
     <span class="text-gold">✨</span>
     <span class="toast-text">Opening email client...</span>
+  </div>
+
+  <!-- Bug Hunter Easter Egg Widget -->
+  <div class="bug-detector">
+    <button class="bug-btn" id="bug-btn" type="button" aria-label="Easter egg bug detector" title="Click to test for bugs">
+      <span class="bug-icon">🐞</span>
+      <span>0 Bugs Detected</span>
+    </button>
   </div>
 
   <!-- Scripts -->
