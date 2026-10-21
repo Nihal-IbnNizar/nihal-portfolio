@@ -1,0 +1,19 @@
+{
+  "name": "muhammed-nihal-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website of Muhammed Nihal – QA Automation Engineer",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve .",
+    "dev": "npx -y serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "qa-engineer",
+    "automation",
+    "playwright",
+    "appium"
+  ],
+  "author": "Muhammed Nihal",
+  "license": "MIT"
+}
