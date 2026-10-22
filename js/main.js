@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTestRunnerTerminal();
   initBugEasterEgg();
   initCopyEmail();
+  initHeroGridGlow();
 });
 
 /**
@@ -437,4 +438,186 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 4000);
+}
+
+/**
+ * Hero spotlight glow effect following cursor inside hero section
+ */
+
+function initHeroGridGlow() {
+  const grid = document.querySelector('.bg-grid');
+  const hero = document.querySelector('.hero-section');
+
+  if (!grid || !hero) return;
+
+  // Prevent duplicate canvases
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  if (!ctx) return;
+
+  grid.replaceChildren(canvas);
+
+  const spacing = 16;
+  const goldSpacing = 32;
+  const radius = 1.1;
+  const reach = 125;
+
+  let width = 0;
+  let height = 0;
+  let mouseX = -1000;
+  let mouseY = -1000;
+  let active = false;
+  let frameId = null;
+  let startTime = 0;
+
+  const reduceMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw(0);
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, width, height);
+
+    const elapsed = time / 1000;
+
+    // Draw the subtle background dots
+    for (let y = 0; y <= height; y += spacing) {
+      for (let x = 0; x <= width; x += spacing) {
+        const isGold =
+          x % goldSpacing === 0 &&
+          y % goldSpacing === 0;
+
+        const dx = x - mouseX;
+        const dy = y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        let intensity = 0;
+        let ripple = 0;
+
+        if (active && distance < reach) {
+          // Smooth falloff: brightest near the cursor
+          const falloff = Math.pow(
+            1 - distance / reach,
+            1.7
+          );
+
+          // Outward-moving ripple rings
+          const wave = Math.max(
+            0,
+            Math.cos(distance * 0.105 - elapsed * 5)
+          );
+
+          ripple = wave * falloff;
+          intensity = falloff;
+        }
+
+        const baseAlpha = isGold ? 0.28 : 0.10;
+        const alpha = Math.min(
+          1,
+          baseAlpha + intensity * 0.2 + ripple * 0.2
+        );
+
+        const dotRadius =
+          radius +
+          intensity * 1.4 +
+          ripple * 0.7;
+
+        // Gold accent dots remain the main visual feature
+        if (isGold) {
+          ctx.fillStyle = `rgba(207, 165, 80, ${alpha})`;
+        } else {
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+        }
+
+        // A soft glow around only the illuminated dots
+        if (intensity > 0.08) {
+          ctx.shadowColor = isGold
+            ? 'rgba(255, 196, 82, 0.95)'
+            : 'rgba(255, 225, 160, 0.8)';
+
+          ctx.shadowBlur = 3 + intensity * 10;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+
+        ctx.beginPath();
+        ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+      }
+    }
+  }
+
+  function animate(time) {
+    draw(time);
+
+    if (active && !reduceMotion) {
+      frameId = requestAnimationFrame(animate);
+    } else {
+      frameId = null;
+    }
+  }
+
+  function startAnimation() {
+    if (reduceMotion || frameId !== null) {
+      draw(0);
+      return;
+    }
+
+    startTime = performance.now();
+    frameId = requestAnimationFrame(animate);
+  }
+
+  function onMouseMove(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    if (reduceMotion) {
+      draw(0);
+      return;
+    }
+
+    startAnimation();
+  }
+
+  function onMouseLeave() {
+    active = false;
+    mouseX = -1000;
+    mouseY = -1000;
+
+    if (frameId !== null) {
+      cancelAnimationFrame(frameId);
+      frameId = null;
+    }
+
+    draw(0);
+  }
+
+  function onMouseEnter(event) {
+    active = true;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    startAnimation();
+  }
+
+  hero.addEventListener('mouseenter', onMouseEnter);
+  hero.addEventListener('mousemove', onMouseMove);
+  hero.addEventListener('mouseleave', onMouseLeave);
+  window.addEventListener('resize', resize);
+
+  resize();
 }
