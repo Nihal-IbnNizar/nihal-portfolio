@@ -123,11 +123,11 @@ const PORTFOLIO_DATA = {
   education: [
     {
       title: "Master of Computer Applications (MCA)",
-      subtitle: "Rajagiri College of Social Sciences · CGPA 8.09"
+      subtitle: "Rajagiri College of Social Sciences"
     },
     {
       title: "Bachelor of Science in Physics",
-      subtitle: "Nirmalagiri College · CGPA 8.20"
+      subtitle: "Nirmalagiri College"
     },
     {
       title: "Qualified UGC-NET Examination",
