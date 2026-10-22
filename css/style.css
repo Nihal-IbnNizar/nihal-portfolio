@@ -206,72 +206,43 @@ section[id] {
 /* ==========================================================================
    Header & Navigation
    ========================================================================== */
-.site-header {
-  position: sticky;
-  top: env(safe-area-inset-top, 0px);
-  z-index: 40;
-  border-bottom: 1px solid var(--border-subtle);
-  background: rgba(10, 10, 10, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
 
+/* Subtle gold border on header hover */
 .header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  transition: border-color 250ms ease;
 }
 
-.logo {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
-  transition: opacity var(--transition-fast);
+.header-container:hover {
+  border-color: rgba(207, 165, 80, 0.5);
 }
 
-.logo:hover {
-  opacity: 0.85;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  overflow-x: auto;
-  white-space: nowrap;
-  font-size: 0.875rem;
-  padding-bottom: 2px;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (min-width: 768px) {
-  .nav-links {
-    gap: 1.75rem;
-  }
-}
-
+/* Gold navigation text on hover */
 .nav-link {
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
+  transition: color 200ms ease;
 }
 
-.nav-link:hover {
-  color: var(--text-primary);
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--gold);
 }
 
+/* Keep the active section gold */
 .nav-link.on {
   color: var(--gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-container,
+  .nav-link {
+    transition: none;
+  }
 }
 
 /* ==========================================================================
    Hero Section
    ========================================================================== */
 .hero-section {
-  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  padding-top: clamp(2rem, 4vw, 2rem);
   padding-bottom: 6rem;
 }
 
@@ -377,7 +348,7 @@ section[id] {
    Work Section (Bento Grid)
    ========================================================================== */
 .work-section {
-  padding-top: 5rem;
+  padding-top: 2rem;
   padding-bottom: 5rem;
 }
 
@@ -446,7 +417,7 @@ section[id] {
    Expertise Section
    ========================================================================== */
 .expertise-section {
-  padding-top: 5rem;
+  padding-top: 2rem;
   padding-bottom: 5rem;
 }
 
@@ -526,7 +497,7 @@ section[id] {
    Experience & Education Section
    ========================================================================== */
 .experience-section {
-  padding-top: 5rem;
+  padding-top: 2rem;
   padding-bottom: 5rem;
 }
 
@@ -634,7 +605,7 @@ section[id] {
    Seminars Section
    ========================================================================== */
 .seminars-section {
-  padding-top: 5rem;
+  padding-top: 2rem;
   padding-bottom: 5rem;
 }
 
@@ -1146,4 +1117,120 @@ svg.inline-block {
 .contact-link:hover .copy-badge {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+/* HEADER LAYOUT RECOVERY — place at the very end of your CSS */
+
+.site-header {
+  position: relative;
+  top: auto;
+  width: 100%;
+  padding: 24px 0 4px;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.site-header .header-container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+
+  background: rgba(20, 20, 20, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+  transition: border-color 250ms ease;
+}
+
+.site-header .logo {
+  flex-shrink: 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.site-header .nav-links {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 24px;
+
+  margin: 0;
+  padding: 3px 0;
+  list-style: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  font-size: 0.875rem;
+}
+
+.site-header .nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.site-header .nav-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 6px 0;
+
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link:focus-visible,
+.site-header .nav-link.on {
+  color: var(--gold);
+}
+
+.site-header .header-container:hover {
+  border-color: rgba(207, 165, 80, 0.5);
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    padding-top: 16px;
+  }
+
+  .site-header .header-container {
+    width: calc(100% - 28px);
+    gap: 16px;
+    padding: 12px 14px;
+    border-radius: 13px;
+  }
+
+  .site-header .nav-links {
+    justify-content: flex-start;
+    gap: 16px;
+    font-size: 0.8rem;
+  }
+
+  .site-header .logo {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header .header-container,
+  .site-header .nav-link {
+    transition: none;
+  }
 }

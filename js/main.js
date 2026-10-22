@@ -581,7 +581,7 @@ function initHeroGridGlow() {
 
     const alpha = Math.min(
       1,
-      baseAlpha + intensity * 0.1 + ripple * 0.1
+      baseAlpha + intensity * 0.2 + ripple * 0.1
     );
 
     ctx.fillStyle = isGold
