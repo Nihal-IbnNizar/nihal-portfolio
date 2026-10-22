@@ -888,7 +888,7 @@ svg.inline-block {
   z-index: 0;
   background: none;
 
-  /* Keep the existing vignette/fade around the dot field */
+  /* Preserve the original CSS grid's radial edge fade. */
   mask-image: radial-gradient(
     ellipse 90% 80% at 50% 25%,
     #000 35%,
@@ -901,6 +901,7 @@ svg.inline-block {
   );
 }
 
+/* JavaScript draws both dot layers onto this canvas. */
 .bg-grid canvas {
   display: block;
   width: 100%;
