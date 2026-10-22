@@ -87,6 +87,7 @@ section[id] {
   letter-spacing: -0.01em;
   background: linear-gradient(100deg, #CFA550 0%, #FFF2CC 40%, #CFA550 70%, #A47B27 100%);
   background-size: 200% auto;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: goldShimmer 8s ease-in-out infinite;
@@ -207,36 +208,183 @@ section[id] {
    Header & Navigation
    ========================================================================== */
 
-/* Subtle gold border on header hover */
-.header-container {
+
+/* ==========================================================================
+   Site Header — Mouse-Following Gold Border Glow
+   ========================================================================== */
+
+.site-header {
+  position: relative;
+  top: auto;
+  width: 100%;
+  padding: 24px 0 4px;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Navbar container */
+.site-header .header-container {
+  position: relative;
+  isolation: isolate;
+
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  box-sizing: border-box;
+  width: calc(100% - 48px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+
+  background: rgba(20, 20, 20, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
+
   transition: border-color 250ms ease;
 }
 
-.header-container:hover {
-  border-color: rgba(207, 165, 80, 0.5);
+/* Mouse-following radial gold border */
+.site-header .header-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    380px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(207, 165, 80, 0.75) 0%,
+    rgba(207, 165, 80, 0.25) 30%,
+    transparent 65%
+  );
+
+  /* Standard CSS masking */
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+
+  /* WebKit compatibility */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+
+  opacity: 0;
+  transition: opacity 250ms ease;
 }
 
-/* Gold navigation text on hover */
-.nav-link {
+/* Reveal the localized gold border glow */
+.site-header .header-container:hover::before {
+  opacity: 1;
+}
+
+/* Keep navbar contents above the glow */
+.site-header .header-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Subtle fallback border change on hover */
+.site-header .header-container:hover {
+  border-color: rgba(207, 165, 80, 0.18);
+}
+
+/* Logo */
+.site-header .logo {
+  flex-shrink: 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+/* Navigation list */
+.site-header .nav-links {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 24px;
+
+  margin: 0;
+  padding: 3px 0;
+  list-style: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  font-size: 0.875rem;
+}
+
+/* Hide navigation scrollbar */
+.site-header .nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navigation links */
+.site-header .nav-link {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 6px 0;
+
+  color: var(--text-secondary);
+  text-decoration: none;
+
   transition: color 200ms ease;
 }
 
-.nav-link:hover,
-.nav-link:focus-visible {
+/* Hover, keyboard focus, and active section */
+.site-header .nav-link:hover,
+.site-header .nav-link:focus-visible,
+.site-header .nav-link.on {
   color: var(--gold);
 }
 
-/* Keep the active section gold */
-.nav-link.on {
-  color: var(--gold);
+/* Mobile responsive layout */
+@media (max-width: 600px) {
+  .site-header {
+    padding-top: 16px;
+  }
+
+  .site-header .header-container {
+    width: calc(100% - 28px);
+    gap: 16px;
+    padding: 12px 14px;
+    border-radius: 13px;
+  }
+
+  .site-header .nav-links {
+    justify-content: flex-start;
+    gap: 16px;
+    font-size: 0.8rem;
+  }
+
+  .site-header .logo {
+    font-size: 1rem;
+  }
 }
 
+/* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .header-container,
-  .nav-link {
+  .site-header .header-container,
+  .site-header .header-container::before,
+  .site-header .nav-link {
     transition: none;
   }
 }
+
 
 /* ==========================================================================
    Hero Section
@@ -1117,120 +1265,4 @@ svg.inline-block {
 .contact-link:hover .copy-badge {
   opacity: 1;
   transform: translateY(0);
-}
-
-
-/* HEADER LAYOUT RECOVERY — place at the very end of your CSS */
-
-.site-header {
-  position: relative;
-  top: auto;
-  width: 100%;
-  padding: 24px 0 4px;
-  border: 0;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.site-header .header-container {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-
-  box-sizing: border-box;
-  width: calc(100% - 48px);
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 24px;
-
-  background: rgba(20, 20, 20, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 16px;
-
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
-  transition: border-color 250ms ease;
-}
-
-.site-header .logo {
-  flex-shrink: 0;
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  text-decoration: none;
-}
-
-.site-header .nav-links {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-  gap: 24px;
-
-  margin: 0;
-  padding: 3px 0;
-  list-style: none;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
-  font-size: 0.875rem;
-}
-
-.site-header .nav-links::-webkit-scrollbar {
-  display: none;
-}
-
-.site-header .nav-link {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  padding: 6px 0;
-
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 200ms ease;
-}
-
-.site-header .nav-link:hover,
-.site-header .nav-link:focus-visible,
-.site-header .nav-link.on {
-  color: var(--gold);
-}
-
-.site-header .header-container:hover {
-  border-color: rgba(207, 165, 80, 0.5);
-}
-
-@media (max-width: 600px) {
-  .site-header {
-    padding-top: 16px;
-  }
-
-  .site-header .header-container {
-    width: calc(100% - 28px);
-    gap: 16px;
-    padding: 12px 14px;
-    border-radius: 13px;
-  }
-
-  .site-header .nav-links {
-    justify-content: flex-start;
-    gap: 16px;
-    font-size: 0.8rem;
-  }
-
-  .site-header .logo {
-    font-size: 1rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .site-header .header-container,
-  .site-header .nav-link {
-    transition: none;
-  }
 }

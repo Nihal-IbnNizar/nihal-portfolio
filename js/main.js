@@ -230,20 +230,29 @@ function initCopyEmail() {
   });
 }
 
+
 /**
- * Card Spotlight Glow Effect (Follows cursor on hover)
+ * Card & Navbar Spotlight Glow Effect
+ * Gold radial glow follows the cursor on hover.
  */
 function initSpotlightGlow() {
-  const cards = document.querySelectorAll('.card');
+  const elements = document.querySelectorAll(
+    '.card, .site-header .header-container'
+  );
 
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
+  elements.forEach(element => {
+    element.addEventListener('mousemove', (e) => {
+      const rect = element.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+      element.style.setProperty('--mouse-x', `${x}px`);
+      element.style.setProperty('--mouse-y', `${y}px`);
+    });
+
+    element.addEventListener('mouseleave', () => {
+      element.style.setProperty('--mouse-x', '-999px');
+      element.style.setProperty('--mouse-y', '-999px');
     });
   });
 }
