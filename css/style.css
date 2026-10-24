@@ -1266,3 +1266,279 @@ svg.inline-block {
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/* ========================================================================== 
+   Scroll-Assembled QA Keyboard
+   ========================================================================== */
+.keyboard-section {
+  position: relative;
+  min-height: 220vh;
+  padding: 0;
+  overflow: clip;
+  isolation: isolate;
+}
+
+.keyboard-pin {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 5vh, 4rem) 0;
+}
+
+.keyboard-intro {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.keyboard-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.keyboard-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.keyboard-intro .section-title {
+  display: block;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
+
+.keyboard-intro .section-title em {
+  white-space: nowrap;
+}
+
+.keyboard-intro .section-subtitle {
+  margin: 0.85rem auto 0;
+  max-width: 34rem;
+  font-size: 0.95rem;
+}
+
+.keyboard-stage {
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  margin: clamp(2.5rem, 6vw, 4.25rem) auto 0;
+  padding: 1rem 0 0.5rem;
+  perspective: 1200px;
+}
+
+.keyboard-halo {
+  position: absolute;
+  inset: 15% 8% 10%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(207, 165, 80, 0.11), transparent 68%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.keyboard-device {
+  position: relative;
+  padding: clamp(0.7rem, 2.2vw, 1.35rem);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #202020 0%, #111111 48%, #090909 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.85),
+    0 28px 60px rgba(0, 0, 0, 0.48),
+    0 1px 0 rgba(207, 165, 80, 0.08);
+  transform: rotateX(3deg);
+  transform-style: preserve-3d;
+}
+
+.keyboard-topline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.1rem 0.15rem 0.85rem;
+  color: var(--text-muted);
+}
+
+.keyboard-topline > span:not(.keyboard-topline-label) {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #454545;
+}
+
+.keyboard-topline > span:first-child { background: #8e594c; }
+.keyboard-topline > span:nth-child(2) { background: #9a8049; }
+.keyboard-topline > span:nth-child(3) { background: #577c5e; }
+
+.keyboard-topline-label {
+  margin-left: auto;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+}
+
+.key-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.35rem, 1.2vw, 0.7rem);
+  padding: 2px;
+}
+
+.qa-key {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: clamp(4.1rem, 8vw, 5.6rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.22rem;
+  overflow: hidden;
+  border: 1px solid #3c3b37;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #292929 0%, #1c1c1c 56%, #151515 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.45),
+    0 4px 0 #090909,
+    0 7px 10px rgba(0, 0, 0, 0.24);
+  color: var(--text-primary);
+  text-align: center;
+  will-change: transform, opacity;
+  transform-origin: center;
+}
+
+.qa-key::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 55%);
+  pointer-events: none;
+}
+
+.qa-key-wide { grid-column: span 2; }
+
+.key-label {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(0.65rem, 1.6vw, 0.9rem);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1.25;
+}
+
+.key-caption {
+  position: relative;
+  z-index: 1;
+  color: #92908a;
+  font-size: clamp(0.48rem, 1.1vw, 0.62rem);
+  letter-spacing: 0.035em;
+}
+
+.qa-key-enter {
+  grid-column: span 3;
+  min-height: clamp(4.5rem, 9vw, 6rem);
+  border-color: rgba(207, 165, 80, 0.72);
+  background: linear-gradient(135deg, #e4c47d 0%, #cfa550 52%, #a47b27 100%);
+  color: #191306;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 249, 222, 0.65),
+    inset 0 -3px 0 rgba(103, 73, 19, 0.4),
+    0 4px 0 #6e511e,
+    0 8px 22px rgba(207, 165, 80, 0.13);
+}
+
+.qa-key-enter .key-caption { color: rgba(25, 19, 6, 0.7); }
+.qa-key-enter .key-label { letter-spacing: 0.13em; }
+
+.key-enter-mark {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.45rem;
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+.keyboard-scroll-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.65rem;
+  color: var(--text-muted);
+  font-size: 0.63rem;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  transition: opacity 250ms ease;
+}
+
+.keyboard-scroll-hint span {
+  color: var(--gold);
+  font-size: 1rem;
+  animation: keyboardNudge 1.8s ease-in-out infinite;
+}
+
+.keyboard-assembled .keyboard-scroll-hint { opacity: 0.35; }
+
+@keyframes keyboardNudge {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(3px); }
+}
+
+@media (max-width: 600px) {
+  .keyboard-section {
+    min-height: 190vh;
+  }
+
+  .keyboard-pin {
+    min-height: 100svh;
+    padding: 2rem 0;
+  }
+
+  .keyboard-stage { margin-top: 2rem; }
+
+  .keyboard-device {
+    padding: 0.65rem;
+    border-radius: 15px;
+    transform: none;
+  }
+
+  .key-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.38rem; }
+  .qa-key { min-height: 4rem; border-radius: 7px; }
+  .qa-key-wide { grid-column: span 2; }
+  .qa-key-enter { grid-column: span 3; min-height: 4.4rem; }
+  .key-label { font-size: clamp(0.58rem, 2.5vw, 0.76rem); }
+  .key-caption { font-size: clamp(0.46rem, 1.8vw, 0.56rem); }
+  .keyboard-topline-label { font-size: 0.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keyboard-section {
+    min-height: auto;
+  }
+
+  .keyboard-pin {
+    position: relative;
+    min-height: auto;
+    padding: 4rem 0;
+  }
+
+  .qa-key,
+  .keyboard-scroll-hint,
+  .keyboard-scroll-hint span {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+

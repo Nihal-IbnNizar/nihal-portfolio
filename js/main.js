@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBugEasterEgg();
   initCopyEmail();
   initHeroGridGlow();
+  initKeyboardAssembly();
 });
 
 /**
@@ -497,6 +498,67 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 4000);
+}
+
+/**
+ * Scroll-linked keyboard assembly.
+ * Keys begin scattered and settle into the keyboard as the section enters view.
+ * Uses native browser APIs; no animation package required.
+ */
+function initKeyboardAssembly() {
+  const section = document.querySelector('.keyboard-section');
+  const keys = section ? Array.from(section.querySelectorAll('[data-key]')) : [];
+  if (!section || !keys.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    keys.forEach(key => {
+      key.style.opacity = '1';
+      key.style.transform = 'none';
+    });
+    section.classList.add('keyboard-assembled');
+    return;
+  }
+
+  let framePending = false;
+
+  function updateAssembly() {
+    const rect = section.getBoundingClientRect();
+    const sectionTop = rect.top + window.scrollY;
+    // The section is taller than the viewport. While its inner content stays
+    // pinned, scrolling through the section scrubs the keys from scattered to assembled.
+    const scrollRange = Math.max(1, section.offsetHeight - window.innerHeight);
+    const progress = Math.max(
+      0,
+      Math.min(1, (window.scrollY - sectionTop) / scrollRange)
+    );
+
+    keys.forEach((key, index) => {
+      const stagger = index * 0.035;
+      const keyProgress = Math.max(0, Math.min(1, (progress - stagger) / (1 - stagger)));
+      const eased = 1 - Math.pow(1 - keyProgress, 3);
+      const x = Number(key.dataset.x || 0) * (1 - eased);
+      const y = Number(key.dataset.y || 0) * (1 - eased);
+      const rotation = Number(key.dataset.rotate || 0) * (1 - eased);
+
+      key.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+      key.style.opacity = String(0.18 + eased * 0.82);
+    });
+
+    section.classList.toggle('keyboard-assembled', progress >= 0.98);
+    framePending = false;
+  }
+
+  function requestUpdate() {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updateAssembly);
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
+  window.addEventListener('load', requestUpdate, { once: true });
+  updateAssembly();
 }
 
 /**
