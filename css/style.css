@@ -1552,7 +1552,33 @@ svg.inline-block {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 55%);
   pointer-events: none;
 }
+/* Cursor-following gold glow on keyboard keys */
+.qa-key::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    100px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(207, 165, 80, 0.95),
+    rgba(207, 165, 80, 0.3) 35%,
+    transparent 70%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
 
+.qa-key:hover::before {
+  opacity: 1;
+}
 .qa-key-wide { grid-column: span 2; }
 
 .key-label {

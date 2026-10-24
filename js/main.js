@@ -366,7 +366,7 @@ function initCopyEmail() {
  */
 function initSpotlightGlow() {
   const elements = document.querySelectorAll(
-    '.card, .site-header .header-container'
+    '.card, .site-header .header-container, .qa-key'
   );
 
   elements.forEach(element => {
