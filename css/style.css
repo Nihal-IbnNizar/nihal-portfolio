@@ -499,7 +499,7 @@ section[id] {
 
 .work-section {
   position: relative;
-  padding: 0;
+  padding-top: 2rem;
 }
 
 /* This entire stage stays pinned while the cards stack */
@@ -690,7 +690,7 @@ section[id] {
    Expertise Section
    ========================================================================== */
 .expertise-section {
-  padding-top: 2rem;
+  padding-top: 0;
   padding-bottom: 5rem;
 }
 
