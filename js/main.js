@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initDoodles();
   renderDailyDrivers();
   renderProjects();
+  initWorkStackAnimation();
   renderExpertise();
   renderExperience();
   renderEducation();
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBugEasterEgg();
   initCopyEmail();
   initHeroGridGlow();
+  initKeyboardAssembly();
 });
 
 /**
@@ -85,6 +87,133 @@ function renderProjects() {
   }).join('');
 
   container.innerHTML = html;
+}
+
+/**
+ * Scroll-controlled project stack.
+ * The work section releases only after every card has arrived.
+ */
+function initWorkStackAnimation() {
+  const section = document.getElementById('work');
+  const stage = section?.querySelector('.work-stage');
+  const grid = section?.querySelector('#work-grid');
+  const cards = grid
+    ? Array.from(grid.querySelectorAll('.work-card'))
+    : [];
+
+  if (!section || !stage || !grid || !cards.length) return;
+
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+
+  let ticking = false;
+
+  if (reducedMotion.matches) {
+    section.classList.add('work-stack-static');
+    return;
+  }
+
+  function updateLayout() {
+    /*
+     * One viewport of pinning for each card, plus the
+     * final viewport where the completed section exits.
+     */
+    section.style.height =
+      `${(cards.length + 1) * window.innerHeight}px`;
+
+    updateStack();
+  }
+
+  
+  function updateStack() {
+    const rect = section.getBoundingClientRect();
+    const scrollDistance = section.offsetHeight - window.innerHeight;
+
+    const progress = Math.max(
+      0,
+      Math.min(1, -rect.top / scrollDistance)
+    );
+
+    const segment = 1 / cards.length;
+    const travelDistance = window.innerHeight * 1.05;
+
+    // Smooth easing without introducing scroll lag
+    const ease = (value) => {
+      const t = Math.max(0, Math.min(1, value));
+      return t * t * (3 - 2 * t);
+    };
+
+    cards.forEach((card, index) => {
+    /*
+     * The first card is visible immediately.
+     * Every following card enters during the previous
+     * card's scroll interval.
+     */
+    const localProgress = index === 0
+      ? 1
+      : Math.max(
+          0,
+          Math.min(
+            1,
+            (progress - (index - 1) * segment) / segment
+          )
+        );
+
+    const entry = ease(localProgress);
+
+    // Incoming cards rise from below the viewport.
+    const translateY = index === 0
+      ? 0
+      : (1 - entry) * travelDistance;
+
+    /*
+     * As the next card arrives, this card recedes:
+     * subtle scale reduction and a gentle fade.
+     */
+    const nextProgress = index < cards.length - 1
+      ? ease(
+          Math.max(
+            0,
+            Math.min(
+              1,
+              (progress - index * segment) / segment
+            )
+          )
+        )
+      : 0;
+
+    const scale = 1 - nextProgress * 0.035;
+    const opacity = index === 0
+      ? 1 - nextProgress * 0.18
+      : entry * (1 - nextProgress * 0.18);
+
+    card.style.transform =
+      `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+
+    card.style.opacity = String(opacity);
+  });
+}
+
+
+  function requestUpdate() {
+    if (ticking) return;
+
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      updateStack();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', requestUpdate, {
+    passive: true
+  });
+
+  window.addEventListener('resize', updateLayout);
+
+  updateLayout();
 }
 
 /**
@@ -237,7 +366,7 @@ function initCopyEmail() {
  */
 function initSpotlightGlow() {
   const elements = document.querySelectorAll(
-    '.card, .site-header .header-container'
+    '.card, .site-header .header-container, .qa-key'
   );
 
   elements.forEach(element => {
@@ -262,7 +391,7 @@ function initSpotlightGlow() {
  */
 function initScrollReveal() {
   const targets = document.querySelectorAll(
-    '.card, .timeline-item, .seminar-card, .education-item'
+    '.card:not(.work-card), .timeline-item, .seminar-card, .education-item'
   );
 
   targets.forEach(el => el.classList.add('reveal-item'));
@@ -497,6 +626,67 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 4000);
+}
+
+/**
+ * Scroll-linked keyboard assembly.
+ * Keys begin scattered and settle into the keyboard as the section enters view.
+ * Uses native browser APIs; no animation package required.
+ */
+function initKeyboardAssembly() {
+  const section = document.querySelector('.keyboard-section');
+  const keys = section ? Array.from(section.querySelectorAll('[data-key]')) : [];
+  if (!section || !keys.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    keys.forEach(key => {
+      key.style.opacity = '1';
+      key.style.transform = 'none';
+    });
+    section.classList.add('keyboard-assembled');
+    return;
+  }
+
+  let framePending = false;
+
+  function updateAssembly() {
+    const rect = section.getBoundingClientRect();
+    const sectionTop = rect.top + window.scrollY;
+    // The section is taller than the viewport. While its inner content stays
+    // pinned, scrolling through the section scrubs the keys from scattered to assembled.
+    const scrollRange = Math.max(1, section.offsetHeight - window.innerHeight);
+    const progress = Math.max(
+      0,
+      Math.min(1, (window.scrollY - sectionTop) / scrollRange)
+    );
+
+    keys.forEach((key, index) => {
+      const stagger = index * 0.035;
+      const keyProgress = Math.max(0, Math.min(1, (progress - stagger) / (1 - stagger)));
+      const eased = 1 - Math.pow(1 - keyProgress, 3);
+      const x = Number(key.dataset.x || 0) * (1 - eased);
+      const y = Number(key.dataset.y || 0) * (1 - eased);
+      const rotation = Number(key.dataset.rotate || 0) * (1 - eased);
+
+      key.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
+      key.style.opacity = String(0.18 + eased * 0.82);
+    });
+
+    section.classList.toggle('keyboard-assembled', progress >= 0.98);
+    framePending = false;
+  }
+
+  function requestUpdate() {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updateAssembly);
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
+  window.addEventListener('load', requestUpdate, { once: true });
+  updateAssembly();
 }
 
 /**
