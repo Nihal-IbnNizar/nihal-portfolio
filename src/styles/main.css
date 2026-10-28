@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Main Stylesheet - Design System Entry Point
+   ========================================================================== */
+
+/* Design Tokens */
+@import "./tokens/variables.css";
+
+/* Base & Reset */
+@import "./base/reset.css";
+@import "./base/typography.css";
+
+/* Components */
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/header.css";
+@import "./components/terminal.css";
+@import "./components/keyboard.css";
+@import "./components/bugHunter.css";
+@import "./components/toast.css";
+@import "./components/doodles.css";
+
+/* Sections */
+@import "./sections/hero.css";
+@import "./sections/work.css";
+@import "./sections/expertise.css";
+@import "./sections/experience.css";
+@import "./sections/seminars.css";
+@import "./sections/contact.css";
+@import "./sections/footer.css";
+
+/* ==========================================================================
+   Lenis Smooth Scrolling Enhancements
+   ========================================================================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}

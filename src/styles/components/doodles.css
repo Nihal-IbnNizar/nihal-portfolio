@@ -1,0 +1,180 @@
+/* ==========================================================================
+   SVG Doodles & Drawing Animations
+   ========================================================================== */
+.dd path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.hero-section .dd path {
+  animation: draw 1.3s ease-out 0.5s backwards;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* Scroll reveal items */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dd.drawn path {
+  animation: draw 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   SVG & Icon Utilities (Exact sizing & alignment)
+   ========================================================================== */
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+svg.inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Sizing Utilities */
+.h-3\.5,
+.h-3-5 {
+  height: 0.875rem !important;
+}
+.w-3\.5,
+.w-3-5 {
+  width: 0.875rem !important;
+}
+
+.h-4 {
+  height: 1rem !important;
+}
+.w-4 {
+  width: 1rem !important;
+}
+
+.h-6 {
+  height: 1.5rem !important;
+}
+.w-6 {
+  width: 1.5rem !important;
+}
+
+.h-7 {
+  height: 1.75rem !important;
+}
+.w-7 {
+  width: 1.75rem !important;
+}
+
+.h-8 {
+  height: 2rem !important;
+}
+.w-8 {
+  width: 2rem !important;
+}
+
+.h-9 {
+  height: 2.25rem !important;
+}
+.w-9 {
+  width: 2.25rem !important;
+}
+
+.h-14 {
+  height: 3.5rem !important;
+}
+.w-14 {
+  width: 3.5rem !important;
+}
+
+/* Display & Alignment */
+.inline-flex {
+  display: inline-flex !important;
+}
+.inline-block {
+  display: inline-block !important;
+}
+.flex {
+  display: flex !important;
+}
+.items-center {
+  align-items: center !important;
+}
+.justify-center {
+  justify-content: center !important;
+}
+.shrink-0 {
+  flex-shrink: 0 !important;
+}
+.align-top {
+  vertical-align: top !important;
+}
+.-scale-x-100 {
+  transform: scaleX(-1) !important;
+}
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .md\:block,
+  .md-block {
+    display: block !important;
+  }
+}
+
+.mt-0\.5,
+.mt-0-5 {
+  margin-top: 0.125rem !important;
+}
+.gap-2 {
+  gap: 0.5rem !important;
+}
+.gap-3 {
+  gap: 0.75rem !important;
+}
+.text-\[10px\] {
+  font-size: 10px !important;
+}
+.leading-none {
+  line-height: 1 !important;
+}
+.font-bold {
+  font-weight: 700 !important;
+}

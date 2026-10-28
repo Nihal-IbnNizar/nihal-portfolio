@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Typography Helpers
+   ========================================================================== */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+}
+
+.section-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15em;
+  letter-spacing: -0.01em;
+  background: linear-gradient(
+    100deg,
+    #cfa550 0%,
+    #fff2cc 40%,
+    #cfa550 70%,
+    #a47b27 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 8s ease-in-out infinite;
+}
+
+@keyframes goldShimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.section-subtitle {
+  margin-top: 0.75rem;
+  max-width: 36rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.text-gold {
+  color: var(--gold);
+}

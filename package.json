@@ -4,8 +4,10 @@
   "description": "Personal portfolio website of Muhammed Nihal – QA Automation Engineer",
   "main": "index.html",
   "scripts": {
-    "start": "npx -y serve .",
-    "dev": "npx -y serve ."
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "keywords": [
     "portfolio",
@@ -15,5 +17,17 @@
     "appium"
   ],
   "author": "Muhammed Nihal",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^26.6.5",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2",
+    "vite": "^6.4.5"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.27"
+  }
 }
