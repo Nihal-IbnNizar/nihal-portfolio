@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Experience & Education Section
+   ========================================================================== */
+.experience-section {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.experience-layout {
+  margin-top: 3rem;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .experience-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Timeline */
+.timeline {
+  list-style: none;
+  border-left: 1px solid var(--border-subtle);
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.35rem;
+  top: 0.35rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary);
+  background-color: #3f3f46;
+}
+
+.timeline-dot.active {
+  background-color: var(--gold);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.timeline-date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.timeline-title {
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timeline-title span {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.timeline-description {
+  margin-top: 0.75rem;
+  max-width: 36rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Education List */
+.education-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.education-list {
+  margin-top: 1.25rem;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.education-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.education-title {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.education-sub {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}

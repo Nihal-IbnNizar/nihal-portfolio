@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Seminars Section
+   ========================================================================== */
+.seminars-section {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.seminars-grid {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .seminars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .seminar-card {
+    padding: 2.25rem;
+  }
+}
+
+.seminar-card h3 {
+  margin-top: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.seminar-card p {
+  margin-top: 0.75rem;
+  color: var(--text-secondary);
+}

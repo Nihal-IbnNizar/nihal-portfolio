@@ -1,32 +1,55 @@
 # Muhammed Nihal – QA Automation Engineer Portfolio
 
-A modern, high-performance, responsive portfolio website built with pure Vanilla HTML5, CSS3, and JavaScript, designed with clean separation of concerns and optimized for zero-config deployment on Vercel.
+A modern, high-performance, responsive portfolio website engineered with clean separation of concerns, built with **Vite**, **TypeScript**, **Lenis Smooth Scroll**, and **GSAP ScrollTrigger**, optimized for zero-config deployment on Vercel.
 
 ---
 
-## 📁 Project Architecture & Separation of Concerns
+## 📁 Architecture & Separation of Concerns
 
 ```text
 nihal-portfolio/
-├── index.html          # Semantic HTML structure & SEO / Social meta tags
-├── css/
-│   ├── variables.css   # Color palette, typography tokens, layout variables
-│   └── style.css       # Layouts, components, bento grid, micro-interactions, responsive CSS
-├── js/
-│   ├── data.js         # Single source of truth for all portfolio content (Projects, Skills, etc.)
-│   ├── icons.js        # Lightweight SVG icon paths & doodle renderers
-│   └── main.js         # DOM rendering, scrollspy navigation, form interaction & toasts
-├── vercel.json         # Vercel caching, clean URLs, and security headers
-├── package.json        # Project metadata and local preview scripts
-├── .gitignore          # Excluded system & cache files
-└── README.md           # Documentation and deployment guide
+├── index.html                  # Semantic HTML structure & SEO / Social meta tags
+├── src/
+│   ├── animations/             # High-performance scroll physics & canvas renderers
+│   │   ├── smoothScroll.ts     # Lenis smooth-scroll initialization & GSAP ticker sync
+│   │   ├── workStack.ts        # GSAP ScrollTrigger timeline for card stack pinning
+│   │   ├── keyboardAssembly.ts # GSAP ScrollTrigger 3D keyboard assemble / scatter
+│   │   ├── heroCanvas.ts       # Optimized dual-layer dot grid with cursor glow & ripple
+│   │   ├── spotlightGlow.ts    # Mouse-following radial gold glow on cards
+│   │   └── scrollReveal.ts     # Scroll-triggered reveals & doodle stroke drawing
+│   ├── components/             # Decoupled interactive feature modules
+│   │   ├── renderers.ts        # Typed DOM renderers for projects, skills, timeline, etc.
+│   │   ├── testTerminal.ts     # Interactive mini test runner with confetti celebration
+│   │   ├── bugHunter.ts        # Easter egg bug detector widget
+│   │   ├── contactForm.ts      # Mailto generator, form validation & email clipboard copy
+│   │   ├── scrollSpy.ts        # Active navbar section tracking
+│   │   └── toast.ts            # Global toast notifications
+│   ├── data/                   # Single source of truth for portfolio content
+│   │   ├── schema.ts           # Strict TypeScript interfaces for data safety
+│   │   └── portfolioData.ts    # Structured content (Profile, Projects, Skills, Timeline)
+│   ├── icons/                  # Vector icon repository & procedural hand-drawn doodles
+│   │   └── icons.ts            # SVG icon paths and stroke generators
+│   ├── styles/                 # Modular CSS architecture
+│   │   ├── tokens/             # Design tokens (colors, typography, radii, transitions)
+│   │   ├── base/               # Reset, typography, container, focus outlines
+│   │   ├── components/         # Buttons, cards, header, terminal, keyboard, toast
+│   │   ├── sections/           # Hero, work, expertise, experience, seminars, contact
+│   │   └── main.css            # Root stylesheet importing all modules & Lenis classes
+│   ├── main.ts                 # Main bootstrap entry point
+│   └── vite-env.d.ts           # Vite client environment types
+├── package.json                # Dependencies, build scripts & dev tools
+├── tsconfig.json               # Strict TypeScript configuration
+├── vite.config.ts              # Vite bundling pipeline & production setup
+├── vercel.json                 # Vercel deployment caching & security headers
+├── .gitignore                  # Git exclusions (node_modules, dist)
+└── README.md                   # Documentation and deployment guide
 ```
 
 ---
 
 ## ⚡ How to Customize Your Content
 
-All portfolio content is separated into `js/data.js`. You do **not** need to touch HTML or CSS to update your details:
+All portfolio content is maintained in `src/data/portfolioData.ts` with strict TypeScript validation. You do **not** need to touch HTML or CSS to update your details:
 
 - **Bio / Headline / Contact**: Edit `PORTFOLIO_DATA.profile`
 - **Daily Drivers**: Edit `PORTFOLIO_DATA.dailyDrivers`
@@ -39,70 +62,30 @@ All portfolio content is separated into `js/data.js`. You do **not** need to tou
 
 ---
 
-## 💻 Local Testing & Preview
-
-You can open `index.html` directly in your browser, or run a local lightweight dev server:
+## 💻 Local Development & Build
 
 ```bash
-# Using npm script:
+# Start local development server with instant HMR:
 npm run dev
 
-# Or directly with npx:
-npx serve .
+# Run TypeScript type check and create production bundle:
+npm run build
+
+# Preview production build locally:
+npm run preview
+
+# Automatically format codebase:
+npm run format
 ```
 
 ---
 
-## 🚀 Step 1: Push to GitHub
+## 🚀 Deployment to Vercel
 
-### 1. Initialize Git in this directory
-Open your terminal in `d:\folder-name` and run:
+The project is pre-configured with `vercel.json` for automatic builds:
 
-```bash
-git init
-git add .
-git commit -m "Initial commit: modular portfolio structure"
-```
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Asset Caching**: 1-year immutable caching on hashed assets
 
-### 2. Create a new repository on GitHub
-1. Go to [github.com/new](https://github.com/new)
-2. Repository name: `nihal-portfolio` (or your preferred name)
-3. Choose **Public**
-4. Leave "Add a README file", ".gitignore", and "license" **unchecked** (we already have them)
-5. Click **Create repository**
-
-### 3. Link and push to GitHub
-Run the following commands in your terminal (replace `YOUR_USERNAME` with your GitHub username):
-
-```bash
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/nihal-portfolio.git
-git push -u origin main
-```
-
----
-
-## 🌐 Step 2: Deploy to Vercel (Free & Instant)
-
-### Option A: Via the Vercel Dashboard (Recommended)
-1. Go to [vercel.com](https://vercel.com) and sign in with your GitHub account.
-2. Click **"Add New..."** → **"Project"**.
-3. Under **"Import Git Repository"**, find `nihal-portfolio` and click **"Import"**.
-4. Project Settings:
-   - **Framework Preset**: *Other* (static site, detected automatically)
-   - **Root Directory**: `./` (default)
-5. Click **"Deploy"**.
-6. Within seconds, your site will be live at `https://your-project-name.vercel.app` with free SSL!
-
-> ✨ **Bonus**: Every time you push changes to GitHub (`git push`), Vercel will automatically re-deploy your site!
-
-### Option B: Via Vercel CLI (Alternative)
-You can also deploy directly from the command line:
-
-```bash
-npx vercel
-```
-Follow the interactive prompts (login, confirm project root, deploy). To deploy directly to production:
-```bash
-npx vercel --prod
-```
+Push your changes to GitHub (`git push origin main`), and Vercel will build and deploy automatically!

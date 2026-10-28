@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Contact Section
+   ========================================================================== */
+.contact-section {
+  padding-top: 5rem;
+  padding-bottom: 6rem;
+}
+
+.contact-layout {
+  margin-top: 3rem;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .contact-layout {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 0;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast);
+}
+
+.form-input::placeholder {
+  color: #52525b;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+  font-size: 0.95rem;
+}
+
+.contact-link:hover {
+  color: var(--gold);
+}
+
+.contact-link .icon-box {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.copy-badge {
+  opacity: 0;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--gold);
+  background: var(--gold-badge-bg);
+  border: 1px solid rgba(207, 165, 80, 0.3);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translateY(2px);
+}
+
+.contact-link:hover .copy-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
