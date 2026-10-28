@@ -370,6 +370,15 @@
         <p class="section-subtitle">Found a bug on this page? Tell me.</p>
         <div class="contact-layout">
           <form id="contact-form" class="contact-form">
+            <!-- Invisible Honeypot to filter spam bots -->
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="hidden"
+              style="display: none"
+              tabindex="-1"
+              autocomplete="off"
+            />
             <input
               class="form-input"
               name="name"
@@ -396,7 +405,13 @@
               aria-label="Message"
             ></textarea>
             <div>
-              <button class="btn btn-gold" type="submit">Send message</button>
+              <button
+                class="btn btn-gold"
+                id="contact-submit-btn"
+                type="submit"
+              >
+                <span>Send message</span>
+              </button>
             </div>
           </form>
           <ul id="contact-links" class="contact-links">
