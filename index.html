@@ -51,32 +51,23 @@
       <div class="wrap header-wrap">
         <a href="#top" class="logo" aria-label="Muhammed Nihal Home">
           <svg
-            class="logo-mark"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            class="logo-monogram"
+            viewBox="0 0 148 168"
+            width="22"
+            height="25"
             aria-hidden="true"
           >
-            <rect
-              x="3"
-              y="3"
-              width="18"
-              height="18"
-              rx="5"
-              stroke="currentColor"
-              stroke-opacity="0.3"
-              fill="rgba(207, 165, 80, 0.08)"
-            />
-            <path
-              d="M8 12.5l2.5 2.5 5.5-6"
-              stroke="var(--gold)"
-              stroke-width="2.2"
+            <!-- Left Pillar -->
+            <polygon points="0,43 22,65 22,146 0,168" class="logo-pillar" />
+            <!-- Diagonal Slash (Signature Gold) -->
+            <polygon points="13,4 109,80 109,106 13,30" class="logo-diagonal" />
+            <!-- Right Pillar -->
+            <polygon
+              points="125,22 147,0 147,167 125,145"
+              class="logo-pillar"
             />
           </svg>
-          <span class="logo-text">MN<span class="text-gold">.</span></span>
+          <span class="logo-text">Nihal<span class="text-gold">.</span></span>
         </a>
 
         <nav class="navlinks" aria-label="Main Navigation">
@@ -477,10 +468,33 @@
       </section>
     </main>
 
-    <!-- Site Footer -->
+    <!-- Site Footer — Natural Sketch Portrait & Calligraphy -->
     <footer class="site-footer">
-      <div class="container">
-        Engineered by Muhammed Nihal. Built for high reliability.
+      <div class="container footer-container">
+        <div class="footer-portrait">
+          <img
+            src="/assets/images/sketch/nihal-sketch.png"
+            alt="Portrait sketch of Muhammed Nihal"
+            class="footer-portrait-img"
+            width="280"
+            height="374"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="footer-quote-wrap">
+          <span class="quote-glyph" aria-hidden="true">“</span>
+          <blockquote class="footer-calligraphic-quote">
+            Quality is never an accident; it is always the result of
+            <em>intelligent effort</em> and <em>unwavering curiosity</em>.
+          </blockquote>
+          <div class="quote-meta">
+            <div class="quote-author-name">Muhammed Nihal</div>
+            <div class="quote-author-sub">
+              Junior QA Automation Engineer · Kerala, India
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
 

@@ -1,10 +1,173 @@
 /* ==========================================================================
-   Site Footer
+   Site Footer — Natural Sketch Portrait & Calligraphy
+   - Nihal's Gold-Etched Sketch seamlessly blending into the canvas
+   - Calligraphic Editorial Quote beside the portrait
+   - No frame, no card, no artificial borders
    ========================================================================== */
+
 .site-footer {
+  position: relative;
   border-top: 1px solid var(--border-subtle);
-  padding: 2.25rem 1.5rem;
-  text-align: center;
+  padding: clamp(5rem, 9vw, 8rem) 0 clamp(4.5rem, 8vw, 7rem);
+  margin-top: 5rem;
+  background: transparent;
+  overflow: hidden;
+}
+
+.site-footer .footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  width: 100%;
+  max-width: var(--max-width, 1120px);
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* ==========================================================================
+   Natural Portrait (No Frame, No Box, Natural Seamless Canvas Blend)
+   ========================================================================== */
+.site-footer .footer-portrait {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.site-footer .footer-portrait-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 280px;
+  object-fit: contain;
+  /* Soft feathered vignette to seamlessly dissolve the dark edges into #0A0A0A */
+  mask-image: radial-gradient(
+    ellipse 92% 92% at 50% 50%,
+    black 72%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 92% 92% at 50% 50%,
+    black 72%,
+    transparent 100%
+  );
+  filter: contrast(1.05) brightness(0.98);
+  transition:
+    transform 0.6s var(--transition-bounce),
+    filter 0.4s ease;
+  user-select: none;
+}
+
+.site-footer .footer-portrait:hover .footer-portrait-img {
+  transform: scale(1.03);
+  filter: contrast(1.08) brightness(1.03);
+}
+
+/* ==========================================================================
+   Calligraphic Quote Typography
+   ========================================================================== */
+.site-footer .footer-quote-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 38rem;
+}
+
+.site-footer .quote-glyph {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 6vw, 4.8rem);
+  font-style: italic;
+  line-height: 0.8;
+  color: var(--gold);
+  opacity: 0.4;
+  margin-bottom: 0.5rem;
+  user-select: none;
+}
+
+.site-footer .footer-calligraphic-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.55rem, 2.7vw, 2.35rem);
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.site-footer .footer-calligraphic-quote em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(
+    100deg,
+    #cfa550 0%,
+    #fff2cc 40%,
+    #cfa550 70%,
+    #a47b27 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 8s ease-in-out infinite;
+}
+
+.site-footer .quote-meta {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-footer .quote-author-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.site-footer .quote-author-sub {
   font-size: 0.875rem;
   color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   Responsive Layout (Mobile & Tablet)
+   ========================================================================== */
+@media (max-width: 820px) {
+  .site-footer .footer-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2.25rem;
+  }
+
+  .site-footer .footer-portrait {
+    max-width: 220px;
+  }
+
+  .site-footer .footer-quote-wrap {
+    align-items: center;
+    max-width: 28rem;
+  }
+
+  .site-footer .quote-glyph {
+    margin-bottom: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer {
+    padding: 3.5rem 0 4.5rem;
+  }
+
+  .site-footer .footer-portrait {
+    max-width: 190px;
+  }
 }

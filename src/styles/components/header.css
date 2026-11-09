@@ -59,12 +59,42 @@
   opacity: 0.9;
 }
 
-.site-header .logo-mark {
+.site-header .logo-mark,
+.site-header .logo-monogram,
+.footer-brand .logo-monogram {
   display: block;
   flex-shrink: 0;
   width: 22px;
-  height: 22px;
-  color: var(--gold);
+  height: 25px;
+  transition:
+    transform 0.3s var(--header-ease),
+    filter 0.3s ease;
+}
+
+.site-header .logo:hover .logo-monogram,
+.footer-brand:hover .logo-monogram {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(207, 165, 80, 0.45));
+}
+
+.logo-pillar {
+  fill: var(--text-primary);
+  transition: fill 0.25s ease;
+}
+
+.logo-diagonal {
+  fill: var(--gold);
+  transition: fill 0.25s ease;
+}
+
+.site-header .logo:hover .logo-pillar,
+.footer-brand:hover .logo-pillar {
+  fill: #ffffff;
+}
+
+.site-header .logo:hover .logo-diagonal,
+.footer-brand:hover .logo-diagonal {
+  fill: var(--gold-light);
 }
 
 .site-header .logo-text {
@@ -119,7 +149,8 @@
 }
 
 /* Letter-roll pill button (The Alcove signature CTA) */
-.pill {
+.site-header .pill,
+.nav-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -145,23 +176,28 @@
   user-select: none;
 }
 
-.pill:hover,
-.pill:focus-visible {
+.site-header .pill:hover,
+.site-header .pill:focus-visible,
+.nav-pill:hover,
+.nav-pill:focus-visible {
   background-color: var(--gold-light);
   box-shadow: 0 4px 20px rgba(207, 165, 80, 0.45);
 }
 
-.pill:active {
+.site-header .pill:active,
+.nav-pill:active {
   transform: scale(0.97);
 }
 
-.pill.ghost {
+.site-header .pill.ghost,
+.nav-pill.ghost {
   background: transparent;
   color: var(--text-primary);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
-.pill.ghost:hover {
+.site-header .pill.ghost:hover,
+.nav-pill.ghost:hover {
   box-shadow: inset 0 0 0 1px var(--gold);
   color: var(--gold);
 }
@@ -249,8 +285,10 @@
 }
 
 /* Trigger rolling translation on hover/focus */
-.pill:hover .roll > span,
-.pill:focus-visible .roll > span,
+.site-header .pill:hover .roll > span,
+.site-header .pill:focus-visible .roll > span,
+.nav-pill:hover .roll > span,
+.nav-pill:focus-visible .roll > span,
 .navlinks a:hover .roll > span,
 .navlinks a:focus-visible .roll > span {
   transform: translateY(-50%);

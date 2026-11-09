@@ -102,6 +102,48 @@
   gap: 0.5rem;
 }
 
+.work-tags .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: auto;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--text-primary);
+  box-shadow: none;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.work-tags .pill:hover {
+  border-color: var(--border-hover);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.work-tags .pill-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.work-tags .pill-icon svg {
+  display: block;
+}
+
+.work-card:hover .work-tags .pill-icon,
+.work-tags .pill:hover .pill-icon {
+  color: var(--text-primary);
+}
+
 @media (hover: hover) {
   .work-grid .work-card:hover {
     border-color: var(--border-hover);

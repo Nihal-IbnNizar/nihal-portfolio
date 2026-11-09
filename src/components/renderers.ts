@@ -40,7 +40,7 @@ export function renderProjects(): void {
         .map(
           (tag) => `
       <span class="pill">
-        <span class="inline-flex text-gold items-center">${getIcon(tag.icon, "h-3.5 w-3.5")}</span>
+        <span class="pill-icon">${getIcon(tag.icon, "h-3.5 w-3.5")}</span>
         <span>${tag.name}</span>
       </span>
     `,
