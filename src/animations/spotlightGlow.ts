@@ -4,7 +4,7 @@
  */
 export function initSpotlightGlow(): void {
   const elements = document.querySelectorAll<HTMLElement>(
-    ".card, .site-header .header-container, .qa-key",
+    ".card, .nav-sheet, .qa-key",
   );
 
   elements.forEach((element) => {

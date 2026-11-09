@@ -3,7 +3,9 @@
  */
 export function initScrollSpy(): void {
   const sections = document.querySelectorAll<HTMLElement>("section[id]");
-  const navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-link");
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>(
+    ".navlinks a, .nav-sheet a",
+  );
 
   if (!sections.length || !navLinks.length) return;
 

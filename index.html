@@ -46,21 +46,77 @@
     <!-- Blueprint Dot Grid (Technical architectural background) -->
     <div class="bg-grid" aria-hidden="true"></div>
 
-    <!-- Sticky Site Header -->
-    <header class="site-header">
-      <div class="container header-container">
+    <!-- Fixed Floating Header (Alcove Tasks Inspired) -->
+    <header class="site-header" id="siteHeader">
+      <div class="wrap header-wrap">
         <a href="#top" class="logo" aria-label="Muhammed Nihal Home">
-          MN<span class="text-gold">.</span>
+          <svg
+            class="logo-mark"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect
+              x="3"
+              y="3"
+              width="18"
+              height="18"
+              rx="5"
+              stroke="currentColor"
+              stroke-opacity="0.3"
+              fill="rgba(207, 165, 80, 0.08)"
+            />
+            <path
+              d="M8 12.5l2.5 2.5 5.5-6"
+              stroke="var(--gold)"
+              stroke-width="2.2"
+            />
+          </svg>
+          <span class="logo-text">MN<span class="text-gold">.</span></span>
         </a>
-        <nav class="nav-links" aria-label="Main Navigation">
-          <a class="nav-link" href="#work">[ Work ]</a>
-          <a class="nav-link" href="#expertise">[ Expertise ]</a>
-          <a class="nav-link" href="#experience">[ Experience ]</a>
-          <a class="nav-link" href="#seminars">[ Seminars ]</a>
-          <a class="nav-link" href="#contact">[ Contact ]</a>
+
+        <nav class="navlinks" aria-label="Main Navigation">
+          <a class="nav-link" href="#work" data-roll>Work</a>
+          <a class="nav-link" href="#expertise" data-roll>Expertise</a>
+          <a class="nav-link" href="#experience" data-roll>Experience</a>
+          <a class="nav-link" href="#seminars" data-roll>Seminars</a>
+          <a class="nav-link" href="#contact" data-roll>Contact</a>
         </nav>
+
+        <div class="navright">
+          <a class="pill" href="#contact" data-roll>Get in Touch</a>
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="Navigation Menu"
+            aria-expanded="false"
+            aria-controls="navSheet"
+          >
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
     </header>
+
+    <!-- Floating Sheet Drawer (Alcove style) -->
+    <div
+      class="nav-sheet"
+      id="navSheet"
+      hidden
+      aria-label="Quick navigation sheet"
+    >
+      <a href="#hero">Overview <span>01</span></a>
+      <a href="#work">Featured Work <span>02</span></a>
+      <a href="#expertise">QA & Automation <span>03</span></a>
+      <a href="#experience">Career Experience <span>04</span></a>
+      <a href="#seminars">Seminars & Talks <span>05</span></a>
+      <a href="#contact">Get in Touch <span>06</span></a>
+    </div>
 
     <!-- Main Content -->
     <main id="top" class="container">
