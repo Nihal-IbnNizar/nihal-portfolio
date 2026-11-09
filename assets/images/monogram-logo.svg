@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 168" width="148" height="168" fill="currentColor">
+  <!-- Left Pillar -->
+  <polygon points="0,43 22,65 22,146 0,168" />
+  <!-- Diagonal Slash -->
+  <polygon points="13,4 109,80 109,106 13,30" />
+  <!-- Right Pillar -->
+  <polygon points="125,22 147,0 147,167 125,145" />
+</svg>

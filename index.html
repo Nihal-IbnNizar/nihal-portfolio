@@ -46,21 +46,68 @@
     <!-- Blueprint Dot Grid (Technical architectural background) -->
     <div class="bg-grid" aria-hidden="true"></div>
 
-    <!-- Sticky Site Header -->
-    <header class="site-header">
-      <div class="container header-container">
+    <!-- Fixed Floating Header (Alcove Tasks Inspired) -->
+    <header class="site-header" id="siteHeader">
+      <div class="wrap header-wrap">
         <a href="#top" class="logo" aria-label="Muhammed Nihal Home">
-          MN<span class="text-gold">.</span>
+          <svg
+            class="logo-monogram"
+            viewBox="0 0 148 168"
+            width="22"
+            height="25"
+            aria-hidden="true"
+          >
+            <!-- Left Pillar -->
+            <polygon points="0,43 22,65 22,146 0,168" class="logo-pillar" />
+            <!-- Diagonal Slash (Signature Gold) -->
+            <polygon points="13,4 109,80 109,106 13,30" class="logo-diagonal" />
+            <!-- Right Pillar -->
+            <polygon
+              points="125,22 147,0 147,167 125,145"
+              class="logo-pillar"
+            />
+          </svg>
+          <span class="logo-text">Nihal<span class="text-gold">.</span></span>
         </a>
-        <nav class="nav-links" aria-label="Main Navigation">
-          <a class="nav-link" href="#work">[ Work ]</a>
-          <a class="nav-link" href="#expertise">[ Expertise ]</a>
-          <a class="nav-link" href="#experience">[ Experience ]</a>
-          <a class="nav-link" href="#seminars">[ Seminars ]</a>
-          <a class="nav-link" href="#contact">[ Contact ]</a>
+
+        <nav class="navlinks" aria-label="Main Navigation">
+          <a class="nav-link" href="#work" data-roll>Work</a>
+          <a class="nav-link" href="#expertise" data-roll>Expertise</a>
+          <a class="nav-link" href="#experience" data-roll>Experience</a>
+          <a class="nav-link" href="#seminars" data-roll>Seminars</a>
+          <a class="nav-link" href="#contact" data-roll>Contact</a>
         </nav>
+
+        <div class="navright">
+          <a class="pill" href="#contact" data-roll>Get in Touch</a>
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            type="button"
+            aria-label="Navigation Menu"
+            aria-expanded="false"
+            aria-controls="navSheet"
+          >
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
     </header>
+
+    <!-- Floating Sheet Drawer (Alcove style) -->
+    <div
+      class="nav-sheet"
+      id="navSheet"
+      hidden
+      aria-label="Quick navigation sheet"
+    >
+      <a href="#hero">Overview <span>01</span></a>
+      <a href="#work">Featured Work <span>02</span></a>
+      <a href="#expertise">QA & Automation <span>03</span></a>
+      <a href="#experience">Career Experience <span>04</span></a>
+      <a href="#seminars">Seminars & Talks <span>05</span></a>
+      <a href="#contact">Get in Touch <span>06</span></a>
+    </div>
 
     <!-- Main Content -->
     <main id="top" class="container">
@@ -176,116 +223,50 @@
                 >
               </div>
               <div class="key-grid">
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="-150"
-                  data-y="-100"
-                  data-rotate="-18"
-                >
-                  <span class="key-label">QA</span
-                  ><span class="key-caption">Quality</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">QA</span>
+                  <span class="key-caption">Quality</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="100"
-                  data-y="-130"
-                  data-rotate="12"
-                >
-                  <span class="key-label">API</span
-                  ><span class="key-caption">Postman</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">API</span>
+                  <span class="key-caption">Postman</span>
                 </div>
-                <div
-                  class="qa-key qa-key-wide"
-                  data-key
-                  data-x="-60"
-                  data-y="110"
-                  data-rotate="-9"
-                >
-                  <span class="key-label">PLAYWRIGHT</span
-                  ><span class="key-caption">Web automation</span>
+                <div class="qa-key qa-key-wide" data-key>
+                  <span class="key-label">PLAYWRIGHT</span>
+                  <span class="key-caption">Web automation</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="170"
-                  data-y="-75"
-                  data-rotate="18"
-                >
-                  <span class="key-label">JS</span
-                  ><span class="key-caption">JavaScript</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">JS</span>
+                  <span class="key-caption">JavaScript</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="-190"
-                  data-y="65"
-                  data-rotate="-14"
-                >
-                  <span class="key-label">PY</span
-                  ><span class="key-caption">Python</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">PY</span>
+                  <span class="key-caption">Python</span>
                 </div>
-                <div
-                  class="qa-key qa-key-wide"
-                  data-key
-                  data-x="80"
-                  data-y="135"
-                  data-rotate="10"
-                >
-                  <span class="key-label">FRAMEWORK</span
-                  ><span class="key-caption">Reliable by design</span>
+                <div class="qa-key qa-key-wide" data-key>
+                  <span class="key-label">FRAMEWORK</span>
+                  <span class="key-caption">Reliable by design</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="-120"
-                  data-y="-120"
-                  data-rotate="15"
-                >
-                  <span class="key-label">PERFORMANCE</span
-                  ><span class="key-caption">JMeter</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">PERFORMANCE</span>
+                  <span class="key-caption">JMeter</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="150"
-                  data-y="85"
-                  data-rotate="-12"
-                >
-                  <span class="key-label">CI/CD</span
-                  ><span class="key-caption">Pipelines</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">CI/CD</span>
+                  <span class="key-caption">Pipelines</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="-80"
-                  data-y="-150"
-                  data-rotate="8"
-                >
-                  <span class="key-label">E2E</span
-                  ><span class="key-caption">Validation</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">E2E</span>
+                  <span class="key-caption">Validation</span>
                 </div>
-                <div
-                  class="qa-key qa-key-enter"
-                  data-key
-                  data-x="40"
-                  data-y="180"
-                  data-rotate="-6"
-                >
-                  <span class="key-label">TEST AUTOMATION</span
-                  ><span class="key-caption">Quality engineered</span
-                  ><span class="key-enter-mark" aria-hidden="true">↗</span>
+                <div class="qa-key qa-key-enter" data-key>
+                  <span class="key-label">TEST AUTOMATION</span>
+                  <span class="key-caption">Quality engineered</span>
+                  <span class="key-enter-mark" aria-hidden="true">↗</span>
                 </div>
-                <div
-                  class="qa-key"
-                  data-key
-                  data-x="190"
-                  data-y="-140"
-                  data-rotate="14"
-                >
-                  <span class="key-label">AI</span
-                  ><span class="key-caption">Intelligent testing</span>
+                <div class="qa-key" data-key>
+                  <span class="key-label">AI</span>
+                  <span class="key-caption">Intelligent testing</span>
                 </div>
               </div>
             </div>
@@ -421,10 +402,33 @@
       </section>
     </main>
 
-    <!-- Site Footer -->
+    <!-- Site Footer — Natural Sketch Portrait & Calligraphy -->
     <footer class="site-footer">
-      <div class="container">
-        Engineered by Muhammed Nihal. Built for high reliability.
+      <div class="container footer-container">
+        <div class="footer-portrait">
+          <img
+            src="/assets/images/sketch/nihal-sketch.png"
+            alt="Portrait sketch of Muhammed Nihal"
+            class="footer-portrait-img"
+            width="280"
+            height="374"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="footer-quote-wrap">
+          <span class="quote-glyph" aria-hidden="true">“</span>
+          <blockquote class="footer-calligraphic-quote">
+            Quality is never an accident; it is always the result of
+            <em>intelligent effort</em> and <em>unwavering curiosity</em>.
+          </blockquote>
+          <div class="quote-meta">
+            <div class="quote-author-name">Muhammed Nihal</div>
+            <div class="quote-author-sub">
+              QA Automation Engineer · Kerala, India
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
 

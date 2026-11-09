@@ -27,6 +27,7 @@ import { initTestRunnerTerminal } from "./components/testTerminal";
 import { initBugEasterEgg } from "./components/bugHunter";
 import { initContactForm, initCopyEmail } from "./components/contactForm";
 import { initScrollSpy } from "./components/scrollSpy";
+import { initHeader } from "./components/header";
 
 function bootstrap(): void {
   // 1. Hand-drawn doodle stroke generation
@@ -42,6 +43,7 @@ function bootstrap(): void {
   renderContactLinks();
 
   // 3. User interactions & forms
+  initHeader();
   initCopyEmail();
   initContactForm();
   initScrollSpy();
